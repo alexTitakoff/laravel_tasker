@@ -11,6 +11,25 @@
 |
 */
 
+Route::get('home', 'HomeController@index');
+
+
+Route::group(['middleware' => 'auth'], function() {
+
+	Route::resource('subtasks', 'SubtaskController');
+	Route::resource('tasks', 'TaskController');
+	Route::resource('projects', 'ProjectController');
+
+
+});
+
+
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController'
+	]);
+
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
